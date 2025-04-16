@@ -2,7 +2,8 @@ import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import path from "path";
-
+import connectDB from "./config/db.js";
+import authRoute from "./routes/authRoute.js";
 dotenv.config();
 
 const app = express();
@@ -16,11 +17,14 @@ app.use(
   })
 );
 
+// Connect to MongoDB
+connectDB();
+
 // Middleware to parse JSON bodies
 app.use(express.json());
 
 // Routes
-// app.use("/api/auth", authRoute);
+app.use("/api/auth", authRoute);
 // app.use("/api/user", userRoute);
 // app.use("/api/task", taskRoute);
 // app.use("/api/report", reportRoute);
