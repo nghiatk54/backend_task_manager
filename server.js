@@ -11,6 +11,8 @@ dotenv.config();
 
 const app = express();
 
+const __dirname = path.resolve();
+
 // Middleware to handle CORS
 app.use(
   cors({
@@ -31,6 +33,9 @@ app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/task", taskRoute);
 app.use("/api/report", reportRoute);
+
+// server static files
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Start the server
 const PORT = process.env.PORT || 5000;
