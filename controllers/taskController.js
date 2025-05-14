@@ -5,10 +5,15 @@ import Task from "../models/Task.js";
 // @access Private
 const getTasks = async (req, res) => {
   try {
+    const filterMap = {
+      Pending: "pending",
+      "In Progress": "in_progress",
+      Completed: "completed",
+    };
     const { status } = req.query;
     let filter = {};
     if (status) {
-      filter.status = status;
+      filter.status = filterMap[status];
     }
     let tasks;
     if (req.user.role == "admin") {
